@@ -212,7 +212,7 @@ void board(int row, int column, int zombie, char *random, int alife, int aattack
          << "-> Alien   : Life " << alife << ", Attack " << aattack << endl;
     for (z = 0; z < zombie; z++)
     {
-        cout << "   Zombie " << z + 1 << ": Life " << *(zombdata + z * 4) << ", Attack " << *(zombdata + z * 4 + 1) << ", Range " << *(zombdata + z * 4 + 2) << endl;
+        cout << "   Zombie " << z + 1 << ": Life " << *(zombdata + z * 6) << ", Attack " << *(zombdata + z * 6 + 1) << ", Range " << *(zombdata + z * 6 + 2) << endl;
     }
     cout << endl;
 }
@@ -330,7 +330,7 @@ void game(int row, int column, int zombie, bool &mainload)
     vector<char> object = {'^', 'v', '<', '>', 'h', 'p', 'r', 'e'};
     vector<char> norock = {'^', 'v', '<', '>', 'h', 'p', 'e'};
     char random[50][50];
-    int zombdata[4][4];
+    int zombdata[4][6];
     srand(time(NULL));
     int o = object.size();
     int nrock = norock.size();
@@ -365,26 +365,19 @@ void game(int row, int column, int zombie, bool &mainload)
             }
             else
             {
+                zombdata[z][4] = r;
+                zombdata[z][5] = c;
                 random[r][c] = 'Z';
                 z += 1;
             }
         }
 
-        for (int z = 0; z < zombie;)
+        for (int z = 0; z < zombie; z++)
         {
-            for (r = 0; r < row; r++)
-            {
-                for (c = 0; c < column; c++)
-                {
-                    ran = random[r][c];
-                    if (ran == 'Z')
-                    {
-                        char ram = char(49 + z);
-                        random[r][c] = ram;
-                        z += 1;
-                    }
-                }
-            }
+            char zombienumber = char(49 + z);
+            int zr = zombdata[z][4];
+            int zc = zombdata[z][5];
+            random[zr][zc] = zombienumber;
         }
     }
 
@@ -448,7 +441,7 @@ void game(int row, int column, int zombie, bool &mainload)
                         }
                         for (int z = 0; z < zombie; z++)
                         {
-                            for (int j = 0; j < 4; j++)
+                            for (int j = 0; j < 6; j++)
                             {
                                 MyFile >> zombdata[z][j];
                             }
@@ -542,11 +535,13 @@ void game(int row, int column, int zombie, bool &mainload)
                     }
                     for (int z = 0; z < zombie; z++)
                     {
-                        for (int j = 0; j < 4; j++)
+                        for (int j = 0; j < 6; j++)
                         {
                             MyFile << zombdata[z][j] << endl;
                         }
                     }
+                    MyFile << alife << endl;
+                    MyFile << aattack << endl;
                     cout << "File saved successfully" << endl;
                     cout << "Press any key to continue . . .";
                     string cintocontinue;
@@ -586,7 +581,7 @@ void game(int row, int column, int zombie, bool &mainload)
                         }
                         for (int z = 0; z < zombie; z++)
                         {
-                            for (int j = 0; j < 4; j++)
+                            for (int j = 0; j < 6; j++)
                             {
                                 MyFile >> zombdata[z][j];
                             }
