@@ -248,70 +248,10 @@ void help()
     cout << endl;
 }
 
-void alienmove(char com, bool &win, int row, int column, char *random)
-{
-    bool movedone = false;
-    int ar, ac;
-    char going;
-    for (int r = 0; r < row; r++)
-    {
-        for (int c = 0; c < column; c++)
-        {
-            char A = *(random + r * column + c);
-            if (A == 'A')
-            {
-                ar = r;
-                ac = c;
-            }
-        }
-    }
-    while (!movedone)
-    {
-        switch (com)
-        {
-        // get going palce
-        case '^':
-            going = *(random + (ar - 1) * column + ac);
-            cout << going;
-            break;
-        case 'v':
-            going = *(random + (ar + 1) * column + ac);
-            cout << going;
-            break;
-        case '<':
-            break;
-        case '>':
-            break;
-        }
-        // check going place
-        switch (going)
-        {
-        case '^':
-            com = '^';
-            // random[ar][ac] = '.';
-            // random[ar-1][ac] = 'A';
-            break;
-        case 'v':
-            going = *(random + (ar + 1) * column + ac);
-            cout << going;
-            break;
-        case '<':
-            break;
-        case '>':
-            break;
-        }
-        // move
-    }
-}
-
 void al(int &alife, int &aattack)
 {
     alife = 100;
     aattack = 0;
-}
-
-void load()
-{
 }
 
 void game(int row, int column, int zombie, bool &mainload)
