@@ -1,4 +1,5 @@
 Alien vs. Zombie
+
 Welcome to Alien vs Zombie!!!This game is to let you to kill all the zombie to get win. There are few command to make you move the alien
 
 Up - alien move upward
